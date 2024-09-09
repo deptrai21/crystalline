@@ -10,28 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  macos:
-    strategy:
-      matrix:
-        runner: [macos-latest, macos-13]
-    runs-on: ${{ matrix.runner }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Install Crystal
-        env:
-          HOMEBREW_NO_INSTALL_UPGRADE: 1
-          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-        run: brew update && brew install crystal || true
-      - name: Build the binary
-        run: |
-          export LLVM_CONFIG="$(brew --prefix)/opt/llvm@18/bin/llvm-config"
-          shards build crystalline --release --no-debug -Dpreview_mt --stats --progress --ignore-crystal-version
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: crystalline_${{ matrix.runner == 'macos-latest' && 'arm64' || 'x86_64' }}-apple-darwin
-          path: ./bin/crystalline
   linux:
     runs-on: ubuntu-latest
     steps:
