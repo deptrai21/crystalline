@@ -3,7 +3,7 @@ FROM crystallang/crystal:1.13.2
 WORKDIR /app
 
 # Add llvm deps.
-RUN apt update && apt install -y build-essential libxml2-dev make llvm-18 llvm-18-dev g++
+RUN apt update && apt install -y build-essential libxml2-dev make llvm-18 llvm-18-dev g++ libpolly-19-dev
 
 # Build crystalline.
 COPY . /app/
