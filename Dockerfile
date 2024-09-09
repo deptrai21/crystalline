@@ -3,7 +3,7 @@ FROM crystallang/crystal:1.13.2
 WORKDIR /app
 
 # Add llvm deps.
-RUN apt install -y --no-cache build-essential libxml2-dev make
+RUN apt update && apt install -y build-essential libxml2-dev make
 
 # Build crystalline.
 COPY . /app/
