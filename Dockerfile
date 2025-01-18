@@ -8,7 +8,7 @@ RUN apt update && apt install -y build-essential libxml2-dev make g++ llvm-18 ll
 # Build crystalline.
 COPY . /app/
 
-RUN git clone -b 1.14.0 --depth=1 https://github.com/crystal-lang/crystal \
+RUN git clone -b 1.15.0 --depth=1 https://github.com/crystal-lang/crystal \
       && make -C crystal llvm_ext \
       && CRYSTAL_PATH=crystal/src:lib shards build crystalline \
       --no-debug --progress --stats --production --static --release \
