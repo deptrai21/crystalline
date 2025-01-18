@@ -1,10 +1,9 @@
-FROM crystallang/crystal:1.14.0-alpine
+FROM crystallang/crystal:1.15.0
 
 WORKDIR /app
 
 # Add llvm deps.
-RUN apk add --update --no-cache --force-overwrite \
-      llvm18-dev llvm18-static g++ libxml2-static zstd-static make
+RUN apt update && apt install -y build-essential libxml2-dev make g++ llvm-18 llvm-18-dev llvm-18-linker-tools llvm-18-tools libpolly-18-dev libzstd-dev
 
 # Build crystalline.
 COPY . /app/
